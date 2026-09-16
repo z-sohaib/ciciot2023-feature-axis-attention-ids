@@ -1,0 +1,42 @@
+program: scripts/run_wandb_trial.py
+method: bayes
+metric:
+  name: macro_f1
+  goal: maximize
+command:
+  - ${env}
+  - .\.venv\Scripts\python.exe
+  - ${program}
+  - --base-config=configs/tabnet_like_cap50k_mi30.toml
+  - --group=tabnet_like_cap50k_mi30
+  - ${args}
+parameters:
+  model.dense_hidden:
+    values: [96, 128, 192, 256]
+  model.decision_steps:
+    values: [3, 4, 5, 6]
+  model.relaxation_factor:
+    values: [1.2, 1.5, 1.8, 2.0]
+  model.dropout:
+    min: 0.05
+    max: 0.35
+  training.learning_rate:
+    distribution: log_uniform_values
+    min: 0.0001
+    max: 0.003
+  training.weight_decay:
+    distribution: log_uniform_values
+    min: 0.000001
+    max: 0.001
+  training.batch_size:
+    values: [256, 512, 768, 1024]
+  training.loss:
+    values: ["cross_entropy", "focal"]
+  training.focal_gamma:
+    values: [1.0, 1.5, 2.0]
+  training.label_smoothing:
+    values: [0.0, 0.02, 0.05]
+  training.class_weight:
+    values: [true, false]
+  training.early_stopping_patience:
+    values: [6, 8, 10]

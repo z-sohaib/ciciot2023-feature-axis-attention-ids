@@ -1,0 +1,42 @@
+[experiment]
+name = "ciciot2023_baseline_smoke"
+seed = 42
+
+[data]
+raw_path = "data/raw"
+label_column = ""
+target_granularity = "category"
+max_rows_per_class = 500
+sample_strategy = "stratified_random"
+processed_path = "data/processed/category_smoke_seed42.npz"
+test_size = 0.20
+val_size = 0.15
+drop_columns = []
+
+[preprocessing]
+variance_threshold = 0.0
+feature_selection = "none"
+feature_selection_k = 0
+
+[model]
+architecture = "cnn"
+conv_channels = 16
+kernel_sizes = [3]
+lstm_hidden = 32
+lstm_layers = 1
+attention_heads = 2
+dense_hidden = 32
+dropout = 0.20
+
+[training]
+epochs = 1
+batch_size = 128
+learning_rate = 0.001
+weight_decay = 0.0001
+early_stopping_patience = 1
+class_weight = true
+loss = "cross_entropy"
+label_smoothing = 0.0
+
+[output]
+run_dir = "runs/baseline_smoke"

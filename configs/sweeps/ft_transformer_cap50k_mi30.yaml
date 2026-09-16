@@ -1,0 +1,44 @@
+program: scripts/run_wandb_trial.py
+method: bayes
+metric:
+  name: macro_f1
+  goal: maximize
+command:
+  - ${env}
+  - .\.venv\Scripts\python.exe
+  - ${program}
+  - --base-config=configs/ft_transformer_cap50k_mi30.toml
+  - --group=ft_transformer_cap50k_mi30
+  - ${args}
+parameters:
+  model.transformer_dim:
+    values: [32, 64, 96, 128]
+  model.transformer_layers:
+    values: [1, 2, 3, 4]
+  model.attention_heads:
+    values: [2, 4, 8]
+  model.dense_hidden:
+    values: [96, 128, 192, 256]
+  model.dropout:
+    min: 0.05
+    max: 0.35
+  training.learning_rate:
+    distribution: log_uniform_values
+    min: 0.0001
+    max: 0.003
+  training.weight_decay:
+    distribution: log_uniform_values
+    min: 0.000001
+    max: 0.001
+  training.batch_size:
+    values: [256, 512, 768]
+  training.loss:
+    values: ["cross_entropy", "focal"]
+  training.focal_gamma:
+    values: [1.0, 1.5, 2.0]
+  training.label_smoothing:
+    values: [0.0, 0.02, 0.05]
+  training.class_weight:
+    values: [true, false]
+  training.early_stopping_patience:
+    values: [6, 8, 10]

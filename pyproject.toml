@@ -1,0 +1,25 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "ciciot2023-ids"
+version = "0.1.0"
+description = "CICIoT2023 external validation experiments for the thesis."
+requires-python = ">=3.12"
+dependencies = [
+    "numpy>=1.26",
+    "pandas>=2.2",
+    "scikit-learn>=1.5",
+    "torch>=2.3",
+    "tqdm>=4.66",
+    "wandb>=0.17",
+]
+
+[project.scripts]
+ciciot2023-check-setup = "ciciot2023_ids.check_setup:main"
+ciciot2023-prepare = "ciciot2023_ids.prepare:main"
+ciciot2023-train = "ciciot2023_ids.train:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]

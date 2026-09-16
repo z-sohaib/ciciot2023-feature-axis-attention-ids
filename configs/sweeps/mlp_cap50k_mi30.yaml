@@ -1,0 +1,42 @@
+program: scripts/run_wandb_trial.py
+method: bayes
+metric:
+  name: macro_f1
+  goal: maximize
+command:
+  - ${env}
+  - .\.venv\Scripts\python.exe
+  - ${program}
+  - --base-config=configs/mlp_cap50k_mi30.toml
+  - --group=mlp_cap50k_mi30
+  - ${args}
+parameters:
+  model.hidden_layers:
+    values:
+      - [128, 64]
+      - [256, 128]
+      - [512, 256]
+      - [512, 256, 128]
+  model.dropout:
+    min: 0.05
+    max: 0.45
+  training.learning_rate:
+    distribution: log_uniform_values
+    min: 0.0001
+    max: 0.003
+  training.weight_decay:
+    distribution: log_uniform_values
+    min: 0.000001
+    max: 0.001
+  training.batch_size:
+    values: [256, 512, 768, 1024]
+  training.loss:
+    values: ["cross_entropy", "focal"]
+  training.focal_gamma:
+    values: [1.0, 1.5, 2.0]
+  training.label_smoothing:
+    values: [0.0, 0.02, 0.05]
+  training.class_weight:
+    values: [true, false]
+  training.early_stopping_patience:
+    values: [6, 8, 10]

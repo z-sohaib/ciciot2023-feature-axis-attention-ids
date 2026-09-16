@@ -1,0 +1,45 @@
+[experiment]
+name = "ciciot2023_tabnet_like_cap50k_mi30"
+seed = 42
+
+[data]
+raw_path = "data/raw"
+label_column = ""
+target_granularity = "category"
+max_rows_per_class = 50000
+sample_strategy = "stratified_random"
+processed_path = "data/processed/category_cap50000_mi30_seed42.npz"
+test_size = 0.20
+val_size = 0.15
+drop_columns = []
+
+[preprocessing]
+variance_threshold = 0.0
+feature_selection = "mutual_info"
+feature_selection_k = 30
+
+[model]
+architecture = "tabnet_like"
+dense_hidden = 192
+decision_steps = 4
+relaxation_factor = 1.5
+conv_channels = 32
+kernel_sizes = [3, 5, 7]
+lstm_hidden = 96
+lstm_layers = 1
+attention_heads = 4
+dropout = 0.20
+
+[training]
+epochs = 40
+batch_size = 512
+learning_rate = 0.001
+weight_decay = 0.0001
+early_stopping_patience = 8
+class_weight = false
+loss = "cross_entropy"
+focal_gamma = 1.0
+label_smoothing = 0.05
+
+[output]
+run_dir = "runs/tabnet_like_cap50k_mi30"

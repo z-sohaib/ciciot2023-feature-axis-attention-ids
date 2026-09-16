@@ -1,0 +1,35 @@
+[experiment]
+name = "ciciot2023_proposed_feature_attention_seed123"
+seed = 123
+
+[data]
+raw_path = "data/raw"
+label_column = ""
+target_granularity = "category"
+max_rows_per_class = 50000
+sample_strategy = "stratified_random"
+processed_path = "data/processed/category_cap50000_seed42.npz"
+test_size = 0.20
+val_size = 0.15
+drop_columns = []
+
+[model]
+architecture = "feature_attention"
+conv_channels = 48
+kernel_sizes = [3, 5, 7]
+lstm_hidden = 96
+lstm_layers = 1
+attention_heads = 4
+dense_hidden = 128
+dropout = 0.25
+
+[training]
+epochs = 40
+batch_size = 512
+learning_rate = 0.001
+weight_decay = 0.0001
+early_stopping_patience = 8
+class_weight = true
+
+[output]
+run_dir = "runs/proposed_feature_attention_seed123"

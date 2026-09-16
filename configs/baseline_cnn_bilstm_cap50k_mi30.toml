@@ -1,0 +1,42 @@
+[experiment]
+name = "ciciot2023_baseline_cnn_bilstm_cap50k_mi30"
+seed = 42
+
+[data]
+raw_path = "data/raw"
+label_column = ""
+target_granularity = "category"
+max_rows_per_class = 50000
+sample_strategy = "stratified_random"
+processed_path = "data/processed/category_cap50000_mi30_seed42.npz"
+test_size = 0.20
+val_size = 0.15
+drop_columns = []
+
+[preprocessing]
+variance_threshold = 0.0
+feature_selection = "mutual_info"
+feature_selection_k = 30
+
+[model]
+architecture = "cnn_bilstm"
+conv_channels = 64
+kernel_sizes = [3]
+lstm_hidden = 96
+lstm_layers = 1
+attention_heads = 4
+dense_hidden = 128
+dropout = 0.25
+
+[training]
+epochs = 40
+batch_size = 512
+learning_rate = 0.001
+weight_decay = 0.0001
+early_stopping_patience = 8
+class_weight = true
+loss = "cross_entropy"
+label_smoothing = 0.0
+
+[output]
+run_dir = "runs/baseline_cnn_bilstm_cap50k_mi30"

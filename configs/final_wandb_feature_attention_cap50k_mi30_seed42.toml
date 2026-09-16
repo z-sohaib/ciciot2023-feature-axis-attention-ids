@@ -1,0 +1,43 @@
+[experiment]
+name = "ciciot2023_final_wandb_feature_attention_cap50k_mi30_seed42"
+seed = 42
+
+[data]
+raw_path = "data/raw"
+label_column = ""
+target_granularity = "category"
+max_rows_per_class = 50000
+sample_strategy = "stratified_random"
+processed_path = "data/processed/category_cap50000_mi30_seed42.npz"
+test_size = 0.20
+val_size = 0.15
+drop_columns = []
+
+[preprocessing]
+variance_threshold = 0.0
+feature_selection = "mutual_info"
+feature_selection_k = 30
+
+[model]
+architecture = "feature_attention"
+conv_channels = 32
+kernel_sizes = [3, 5, 7]
+lstm_hidden = 96
+lstm_layers = 1
+attention_heads = 2
+dense_hidden = 96
+dropout = 0.31296944304709606
+
+[training]
+epochs = 40
+batch_size = 512
+learning_rate = 0.002496269571186655
+weight_decay = 0.000800751456591398
+early_stopping_patience = 10
+class_weight = false
+loss = "cross_entropy"
+focal_gamma = 1.0
+label_smoothing = 0.05
+
+[output]
+run_dir = "runs/final_wandb_feature_attention_cap50k_mi30_seed42"
