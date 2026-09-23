@@ -56,7 +56,6 @@ Raw and processed CICIoT2023 files are not tracked by Git.
   configs/                  Baseline, proposed, final, and sweep configurations.
     sweeps/                 W&B sweep definitions.
   data/                     Local raw and processed CICIoT2023 files, ignored by Git.
-  plan/                     Research plans, phase summaries, and SOTA positioning notes.
   reports/                  Supervisor-facing reports and generated figures.
   runs/                     Local training outputs, ignored by Git.
   scripts/                  Profiling, preprocessing, reporting, and W&B utilities.
