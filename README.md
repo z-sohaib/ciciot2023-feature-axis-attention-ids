@@ -223,11 +223,3 @@ Do not commit:
 - generated cache files.
 
 Keep source code, configs, research notes, and Markdown reports under version control.
-
-## Suggested Repository Names
-
-- `ciciot2023-feature-axis-attention-ids`
-- `ciciot2023-iot-dl-validation`
-- `ciciot2023-multiclass-ids-benchmark`
-
-Recommended: `ciciot2023-feature-axis-attention-ids`
